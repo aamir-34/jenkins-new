@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  labels:
+    app: my-app
+spec:
+  replicas: 1 # Number of desired pods
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app-container
+          image: us-central1-docker.pkg.dev/high-splicer-429006-m7/repo-image/aamir-image # Replace with your Docker image URL
+          ports:
+            - containerPort: 80  # Port exposed by the container
+          # Add other configuration like environment variables, volume mounts, etc.
