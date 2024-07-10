@@ -6,6 +6,7 @@ pipeline {
         REPOSITORY = 'us-central1-docker.pkg.dev/high-splicer-429006-m7/repo-image'
         IMAGE_NAME = 'aamir-latest'
         GCP_CREDENTIALS = credentials('gcp-service-account')
+        GCP_KEY_FILE    = 'high-splicer-429006-m7-b3873a9f89ed.json'
     }
 
     stages {
