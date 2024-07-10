@@ -28,29 +28,22 @@ pipeline {
             }
         }
         
-        stage('Authenticate') {
+        stage('Authenticate and Push') {
             steps {
                 script {
                     // Authenticate with GCP using service account key
                     withCredentials([file(credentialsId: 'gcp-service-account', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                         sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
                         sh "gcloud auth configure-docker ${REGION}-docker.pkg.dev"
+                        
+                        // Push the Docker image to GCP Artifact Registry
+                        sh "docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}"
                     }
                 }
             }
         }
         
-        stage('Push') {
-            steps {
-                script {
-                    // Push the Docker image to GCP Artifact Registry
-                    sh "docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}" 
-                }
-            }
-        }
-    }
-    
-    stage('Deploy to GKE') {
+        stage('Deploy to GKE') {
             steps {
                 script {
                     // Authenticate with GKE cluster
@@ -75,7 +68,3 @@ pipeline {
         }
     }
 }
-
-
-
-
