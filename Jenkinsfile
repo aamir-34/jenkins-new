@@ -3,10 +3,10 @@ pipeline {
     
     environment {
         PROJECT_ID = 'high-splicer-429006-m7'
-        IMAGE_NAME = 'aamir-image'
+        IMAGE_NAME = 'aamir-image:latest'
         IMAGE_TAG = 'latest'
         REGION = 'us-central1' 
-        REPOSITORY = 'us-central1-docker.pkg.dev/high-splicer-429006-m7/repo-image' 
+        REPOSITORY = 'repo-image' 
     }
     
     stages {
