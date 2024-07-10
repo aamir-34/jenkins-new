@@ -67,7 +67,7 @@ pipeline {
             echo 'Deployment succeeded!'
         }
         failure {
-            echo 'Deployment failed! Check Jenkins logs for details.'
+            echo 'deployment failed'
         }
     }
 }
