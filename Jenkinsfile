@@ -74,7 +74,7 @@ pipeline {
             echo 'Deployment failed! Check Jenkins logs for details.'
         }
     }
-
+}
 
 
 
