@@ -44,7 +44,7 @@ pipeline {
                 script {
                     // Push the Docker image to GCP Artifact Registry
                     gcloud auth configure-docker $REGION-docker.pkg.dev
-                    sh "docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}" -y
                 }
             }
         }
