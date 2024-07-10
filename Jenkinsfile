@@ -8,7 +8,7 @@ pipeline {
         IMAGE_TAG = 'latest'
         REGION = 'us-central1' 
         REPOSITORY = 'repo-image' 
-        ZONE       = 'us-central1-c
+        ZONE       = 'us-central1-c'
     }
     
     stages {
