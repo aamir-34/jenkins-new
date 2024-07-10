@@ -8,6 +8,7 @@ pipeline {
         IMAGE_TAG = 'latest'
         REGION = 'us-central1' 
         REPOSITORY = 'repo-image' 
+        ZONE       = 'us-central1-c
     }
     
     stages {
@@ -49,7 +50,7 @@ pipeline {
                     // Authenticate with GKE cluster
                     withCredentials([file(credentialsId: 'gcp-service-account', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                         sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
-                        sh "gcloud container clusters get-credentials ${CLUSTER_NAME} --region ${REGION} --project ${PROJECT_ID}"
+                        sh "gcloud container clusters get-credentials ${CLUSTER_NAME} --zone ${ZONE} --project ${PROJECT_ID}"
                         
                         // Deploy the application to GKE
                         sh "kubectl set image deployment/${IMAGE_NAME} ${IMAGE_NAME}=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG} --record"
