@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     // Authenticate with GCP using service account key
-                    withCredentials([file(credentialsId: 'gcp-service-account-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    withCredentials([file(credentialsId: 'gcp-service-account', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                         sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
                         sh "gcloud auth configure-docker ${REGION}-docker.pkg.dev"
                     }
