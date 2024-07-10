@@ -12,7 +12,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                'git branch: 'main', url: 'https://github.com/aamir-34/jenkins-new.git'
+                script {
+                    git branch: 'main', url: 'https://github.com/aamir-34/jenkins-new.git'
+                }
             }
         }
         
@@ -30,8 +32,8 @@ pipeline {
                 script {
                     // Authenticate with GCP using service account key
                     withCredentials([file(credentialsId: 'gcp-service-account-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-                        sh 'gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}'
-                        sh 'gcloud auth configure-docker ${REGION}-docker.pkg.dev'
+                        sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
+                        sh "gcloud auth configure-docker ${REGION}-docker.pkg.dev"
                     }
                 }
             }
